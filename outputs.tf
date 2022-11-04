@@ -29,12 +29,12 @@ output "transit_vnet_name" {
 
 output "external_subnet_prefix" {
   description = "Transit VNET external subnet prefix."
-  value = azurerm_subnet.transit_external.address_prefixes[0]
+  value       = azurerm_subnet.transit_external.address_prefixes[0]
 }
 
 output "internal_subnet_prefix" {
   description = "Transit VNET internal subnet prefix."
-  value = azurerm_subnet.transit_internal.address_prefixes[0]
+  value       = azurerm_subnet.transit_internal.address_prefixes[0]
 }
 
 output "rsg_name" {

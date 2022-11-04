@@ -117,7 +117,7 @@ variable "assign_global_reader" {
 }
 
 variable "use_ilb" {
-  type = bool
-  default = false 
+  type        = bool
+  default     = false
   description = "Create an internal load balancer. Intention is to allow the NVA to advertise BGP routes towards the Route Server with the ILB frontend address as the next-hop. ILB should deal with probe loss failovers within 10 secs."
 }

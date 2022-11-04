@@ -33,7 +33,8 @@ provider "azurerm" {
 }
 
 module "azure_fortigate_pair" {
-  source = "../.."
+  source  = "poroping/secure-vnet-nva/azurerm"
+  version = "~> 0.0.1"
 
   location            = "North Europe"
   name_prefix         = "advpn-hub-01"
@@ -51,16 +52,16 @@ module "azure_fortigate_pair" {
       priority = 150
     }
   ]
-  create_sslvpn        = true
-  assign_global_reader = true
+
+  # module options
+  create_sslvpn        = false
+  assign_global_reader = false
+  use_ilb              = false
+
 }
 
 output "fortigate_public_ips" {
   value = module.azure_fortigate_pair.nva_public_ips
-}
-
-output "elb_public_ip" {
-  value = module.azure_fortigate_pair.elb_public_ip
 }
 
 ## Dev vnet
@@ -123,6 +124,7 @@ resource "azurerm_virtual_network_peering" "transit2dev" {
 }
 
 # To validate we should now see this VNET prefix advertised to the NVA via BGP.
+# NVA MGMT interface will be accessible on port 10443 from list of trusted hosts.
 ```
 
 ## Providers
