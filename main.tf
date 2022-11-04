@@ -2,6 +2,8 @@
 * # terraform-azurerm-secure-vnet-nva
 * The following module will spin up the infrastructure needed to simplify Azure network routing and allow routing towards the VNETs to be controlled by an NVA of your choice. This could be a Firewall/Router/SDWAN device.
 * 
+* -> As of initial release the only NVA option is a pair of Fortigates.
+*
 * ## Caveats
 * - The NVA must support BGP
 * - The NVA must support eBGP multihop
