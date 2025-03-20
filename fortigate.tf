@@ -1,16 +1,3 @@
-# tflint-ignore: terraform_required_providers
-resource "random_password" "apikey" {
-  count = var.api_key == null ? 0 : 1
-
-  length  = 30
-  special = false
-}
-# tflint-ignore: terraform_required_providers
-resource "random_password" "haenc" {
-  length  = 30
-  special = false
-}
-
 resource "azurerm_virtual_machine" "fortigate" {
   count = local.nva.type == "fortigate" ? 2 : 0
 
@@ -89,8 +76,8 @@ data "template_file" "fortigate_custom_data" {
     bgp_asn                   = local.nva.bgp_asn
     bgp_offset                = -4000
     routerid                  = azurerm_public_ip.nva_pip[count.index].ip_address
-    ilb                       = var.internal_lb
-    ilb_ip                    = var.internal_lb == true ? azurerm_lb.ilb[0].private_ip_address : false
+    ilb                       = var.use_ilb
+    ilb_ip                    = var.use_ilb == true ? azurerm_lb.ilb[0].private_ip_address : false
   }
 }
 
